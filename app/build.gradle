@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: "org.sonarqube"
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        applicationId "com.example.androidattendancesystem"
+        minSdkVersion 14
+        targetSdkVersion 26
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:26.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    testImplementation 'junit:junit:4.12'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "AndroidAttendanceApp"
+        property "sonar.projectKey", "AndroidAttendanceApp"
+        property "sonar.tests", ["src/test/java"]
+        property "sonar.test.inclusions", "**/*Test*/**"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.sources", "src/main/java"
+        property "sonar.exclusions", '**/*Test*/**,' +
+                '*.json,' +
+                '**/*test*/**,' +
+                '**/.gradle/**,' +
+                '**/R.class'
+    }
+}
